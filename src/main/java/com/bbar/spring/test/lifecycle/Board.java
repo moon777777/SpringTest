@@ -1,5 +1,7 @@
 package com.bbar.spring.test.lifecycle;
 
+import org.springframework.http.ResponseEntity;
+
 public class Board {
 	
 	private String title;
@@ -28,5 +30,6 @@ public class Board {
 	public String getContent() {
 		return content;
 	}
+	
 
 }
