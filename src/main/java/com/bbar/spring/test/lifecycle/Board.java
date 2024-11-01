@@ -18,18 +18,19 @@ public class Board {
 	public String toString() {
 		return "title : " + title + " user : " + user + " content : " + content;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public String getUser() {
 		return user;
 	}
-	
+
 	public String getContent() {
 		return content;
 	}
+	
 	
 
 }
