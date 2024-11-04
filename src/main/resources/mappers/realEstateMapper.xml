@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace = "com.bbar.spring.test.mybatis.repository.RealEstateRepository">
+ 	
+ 	<select id="selectRealEstate"
+ 	resultType="com.bbar.spring.test.mybatis.domain.RealEstate"
+ 	parameterType="int">
+ 	
+ 	SELECT 
+ 		`id`
+ 		, `realtorId`
+ 		, `address`
+ 		, `area`
+ 		, `type`
+ 		, `price`
+ 		, `rentPrice`
+ 		, `createdAt`
+ 		, `updatedAt`
+ 	FROM 
+ 		`real_estate`
+ 	WHERE
+ 		`id` = #{id};
+ 	</select>
+ 	
+ 	<select id="selectRealEstateRent"
+            resultType="com.bbar.spring.test.mybatis.domain.RealEstate"
+            parameterType="int">
+        SELECT 
+            `id`,
+            `realtorId`,
+            `address`,
+            `area`,
+            `type`,
+            `price`,
+            `rentPrice`,
+            `createdAt`,
+            `updatedAt`
+        FROM 
+            `real_estate`
+        WHERE
+            `rentPrice` &lt; #{rentPrice};
+    </select>
+    
+    <select id="selectRealEstateAreaPrice"
+            resultType="com.bbar.spring.test.mybatis.domain.RealEstate"
+            parameterType="int">
+        SELECT 
+            `id`,
+            `realtorId`,
+            `address`,
+            `area`,
+            `type`,
+            `price`,
+            `rentPrice`,
+            `createdAt`,
+            `updatedAt`
+        FROM 
+            `real_estate`
+        WHERE
+            `area` >= #{area} AND `price` &lt;= #{price} ORDER BY `realtorId`;
+    </select>
+ 	
+ 	
+ </mapper>
+ 
+ 
+ 

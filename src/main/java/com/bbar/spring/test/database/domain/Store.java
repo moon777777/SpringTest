@@ -13,7 +13,7 @@ public class Store {
 	private String phoneNumber;
 	private String address;
 	private String businessNumber;
-	private String text;
+	private String introduce;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	public int getId() {
@@ -46,11 +46,11 @@ public class Store {
 	public void setBusinessNumber(String businessNumber) {
 		this.businessNumber = businessNumber;
 	}
-	public String getText() {
-		return text;
+	public String getIntroduce() {
+		return introduce;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
 	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
