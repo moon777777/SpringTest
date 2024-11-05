@@ -22,7 +22,7 @@
  	FROM 
  		`real_estate`
  	WHERE
- 		`id` = #{id};
+ 		`id` = #{id}
  	</select>
  	
  	<select id="selectRealEstateRent"
@@ -41,12 +41,12 @@
         FROM 
             `real_estate`
         WHERE
-            `rentPrice` &lt; #{rentPrice};
+            `rentPrice` &lt; #{rentPrice}
     </select>
     
     <select id="selectRealEstateAreaPrice"
             resultType="com.bbar.spring.test.mybatis.domain.RealEstate"
-            parameterType="int">
+            parameterType="map">
         SELECT 
             `id`,
             `realtorId`,
@@ -60,8 +60,70 @@
         FROM 
             `real_estate`
         WHERE
-            `area` >= #{area} AND `price` &lt;= #{price} ORDER BY `realtorId`;
+            `area` >= #{area} AND `price` &lt;= #{price} ORDER BY `realtorId`
     </select>
+    
+    <insert id="insertRealEstateByObject" parameterType="com.bbar.spring.test.mybatis.domain.RealEstate">
+    	INSERT INTO
+    		`real_estate`
+    	(
+    		`realtorId`
+    		, `address`
+    		, `area`
+    		, `type`
+    		, `price`
+    		, `rentPrice`    		
+    	)
+    	VALUE
+    	(
+    		#{realtorId}
+    		, #{address}
+    		, #{area}
+    		, #{type}
+    		, #{price}
+    		, #{rentPrice}
+    	)
+    </insert>
+    
+    <insert id="insertRealEstate" parameterType="map">
+    	INSERT INTO
+    		`real_estate`
+    	(
+    		`realtorId`
+    		, `address`
+    		, `area`
+    		, `type`
+    		, `price`
+    		, `rentPrice`    		
+    	)
+    	VALUE
+    	(
+    		#{realtorId}
+    		, #{address}
+    		, #{area}
+    		, #{type}
+    		, #{price}
+    		, #{rentPrice}
+    	)
+    </insert>
+    
+    <update id="updateRealEstateByObject" parameterType="com.bbar.spring.test.mybatis.domain.RealEstate">
+    	UPDATE 
+    		`real_estate`
+    	SET
+    		`type` = #{type}
+    		, `price`= #{price}
+    		, `updatedAt` = now()
+    	WHERE
+    		`id` = #{id}
+    	
+    </update>
+    
+    <delete id="deleteRealEstateByObject" parameterType="com.bbar.spring.test.mybatis.domain.RealEstate">
+    	DELETE FROM `real_estate`
+    	WHERE `id` = #{id}
+    
+    </delete>
  	
  	
  </mapper>

@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bbar.spring.test.mybatis.domain.RealEstate;
 import com.bbar.spring.test.mybatis.service.RealEstateService;
 
+@RequestMapping("/mybatis/realEstate")
 @Controller
 public class RealEstateController {
 	
 	@Autowired
 	private RealEstateService realEstateService;
 	
-	@RequestMapping("/mybatis/realEstate/1")
+	@RequestMapping("/select/1")
 	@ResponseBody
 	public RealEstate realEstae(@RequestParam("id") int id) {
 		
@@ -26,7 +27,7 @@ public class RealEstateController {
 		return realEstate;
 	}
 	
-	@RequestMapping("/mybatis/realEstate/2")
+	@RequestMapping("/select/2")
 	@ResponseBody
 	public List<RealEstate> realEstateRent(@RequestParam("rent") int rentPrice) {
 		
@@ -35,7 +36,7 @@ public class RealEstateController {
 		return realEstate;
 	}
 	
-	@RequestMapping("/mybatis/realEstate/3")
+	@RequestMapping("/select/3")
 	@ResponseBody
 	public List<RealEstate> realEstateAreaPrice(@RequestParam("area") int area, @RequestParam("price") int price) {
 		
@@ -43,5 +44,55 @@ public class RealEstateController {
 		
 		return realEstate;
 	}
+	// INSERT TEST
+	@RequestMapping("/create/1")
+	@ResponseBody
+	public String createRealEstateByObject() {
+		RealEstate realEstate = new RealEstate();
+		
+		realEstate.setRealtorId(3);
+		realEstate.setAddress("푸르지용 리버 303동 1104호");
+		realEstate.setArea(89);
+		realEstate.setType("매매");
+		realEstate.setPrice(100000);
+		
+		int count = realEstateService.addRealEsateByObect(realEstate);
+		
+		return "삽입 결과 : " + count;
+	}
 	
+	@RequestMapping("/create/2")
+	@ResponseBody
+	public String createRealEstate(@RequestParam("realtorId") int realtorId) {
+		int count = realEstateService.addRealEstate(realtorId ,"썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
+		
+		return "입력 성공 : " + count;
+	}
+	// UPDATE TEST
+	@RequestMapping("/update")
+	@ResponseBody
+	public String updateRealEstateByObject() {
+		RealEstate realEstate = new RealEstate();
+		
+		realEstate.setId(28);
+		realEstate.setType("전세");
+		realEstate.setPrice(70000);
+		
+		int count = realEstateService.addUpdateRealEstateByObject(realEstate);
+		
+		return "수정 성공 : " + count;
+	}
+	
+	// DELETE TEST
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String deleteRealEstateByObject(@RequestParam("id") int id) {
+		RealEstate realEstate = new RealEstate();
+		
+		realEstate.setId(id);
+		
+		int count = realEstateService.addDeleteRealEstateByObject(realEstate);
+		
+		return "삭제 성공 : " + count;
+	}
 }
