@@ -119,7 +119,7 @@
     	
     </update>
     
-    <delete id="deleteRealEstateByObject" parameterType="com.bbar.spring.test.mybatis.domain.RealEstate">
+    <delete id="deleteRealEstateByObject" parameterType="int">
     	DELETE FROM `real_estate`
     	WHERE `id` = #{id}
     

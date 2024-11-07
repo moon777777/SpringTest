@@ -64,9 +64,9 @@ public class RealEstateService {
 	}
 	
 	// DELETE TEST
-	public int addDeleteRealEstateByObject(RealEstate realEstate) {
+	public int addDeleteRealEstateByObject(int id) {
 		
-		int count = realEstateRepository.deleteRealEstateByObject(realEstate);
+		int count = realEstateRepository.deleteRealEstateByObject(id);
 		
 		return count;
 	}

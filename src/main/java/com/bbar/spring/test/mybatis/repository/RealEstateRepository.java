@@ -31,7 +31,8 @@ public interface RealEstateRepository {
 	public int updateRealEstateByObject(RealEstate realestate);
 	
 	// DELETE TEST
-	public int deleteRealEstateByObject(RealEstate realestate);
+	public int deleteRealEstateByObject(
+			@Param("id") int id);
 }
 
 

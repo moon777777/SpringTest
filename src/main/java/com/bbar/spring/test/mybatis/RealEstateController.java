@@ -91,7 +91,7 @@ public class RealEstateController {
 		
 		realEstate.setId(id);
 		
-		int count = realEstateService.addDeleteRealEstateByObject(realEstate);
+		int count = realEstateService.addDeleteRealEstateByObject(id);
 		
 		return "삭제 성공 : " + count;
 	}

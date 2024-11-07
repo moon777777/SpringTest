@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.bbar.spring.test.mvc.repository.SellerRepository">
+ 
+ 	<insert id="insertSeller" parameterType="map">
+ 		INSERT INTO
+ 			`seller`
+ 		(
+ 			`nickname`
+ 			, `profileImage`
+ 			, `temperature`
+ 		)
+ 		VALUES
+ 		(
+ 			#{nickname}
+ 			, #{profileImage}
+ 			, #{temperature}
+ 		)
+ 		
+ 	</insert>
+ 
+ </mapper>
