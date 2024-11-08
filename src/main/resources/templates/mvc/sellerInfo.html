@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>판매자 정보</title>
@@ -7,8 +7,10 @@
 </head>
 <body>
 	<div class="container">
-		<h2>판매자 정보</h2>
-		<!-- <img alt = "책표지" src = <%= book.get("image") %>> -->
+		<h2 th:text = "${title}"></h2>
+		<img alt = "프로필" width=200px; th:src = "${result.profileImage}">
+		<div class="display-4" th:text="${result.nickname}"></div>
+		<h3 class = "text-warning"  th:text="${result.temperature}"></h3>
 	</div>
 
 

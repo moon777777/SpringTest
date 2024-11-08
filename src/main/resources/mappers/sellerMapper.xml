@@ -21,5 +21,39 @@
  		)
  		
  	</insert>
+ 	
+ 	<select id="selectLastSeller" resultType="com.bbar.spring.test.mvc.domain.Seller">
+ 	SELECT 
+ 		`id`
+ 		, `nickname`
+ 		, `temperature`
+ 		, `profileImage`
+ 		, `createdAt`
+ 		, `updatedAt`
+ 	FROM
+ 		`seller`
+ 	ORDER BY
+ 		`id` DESC
+ 	LIMIT
+ 		1
+ 		
+ 	</select>
+ 	
+ 	<select id="selectSearchSeller" resultType="com.bbar.spring.test.mvc.domain.Seller" parameterType="int">
+ 	SELECT 
+ 		`id`
+ 		, `nickname`
+ 		, `temperature`
+ 		, `profileImage`
+ 		, `createdAt`
+ 		, `updatedAt`
+ 	FROM
+ 		`seller`
+ 	WHERE
+ 		`id` = #{id}
+ 	LIMIT
+ 		1
+ 		
+ 	</select>
  
  </mapper>
