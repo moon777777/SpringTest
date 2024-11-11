@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>변수</title>
+
 </head>
 <body>
-	<h1>1. 변수</h1>
-	<th:block th:with="number1=36, number2=3, average=${(number1 + number2) / 2.0}">
+	<div class = "contatiner" th:with="number1=36, number2=3">
+		<h1>1. 변수</h1>
 		<h3 th:text="'첫번째 숫자 : ' + ${number1}"></h3>
 		<h3 th:text="|두번째 숫자 : ${number2}|"></h3>
 		
@@ -19,11 +20,14 @@
 		<h1>3. 태그 그대로 출력</h1>
 		<div th:utext="'<b>안녕하세요</b>'"></div>
 		
-		<h1>4. if와 unless</h1>
-		<h1 th:if="${average >= 10}" th:text="${average}"></h1>
-		<h3 th:unless="${average >= 10}" th:text="${average}"></h3>
+		<th:block th:with="average=${(number1 + number2) / 2.0}">
+			<h1>4. if와 unless</h1>
+			<h1 th:if="${average >= 10}" th:text="${average}"></h1>
+			<h3 th:unless="${average >= 10}" th:text="${average}"></h3>	
+		</th:block>
+	</div>
 		
-	</th:block>
+	
 	
 	
 	
