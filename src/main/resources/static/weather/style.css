@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+#wrap {
+	width: 1200px;
+	margin:0 auto;
+}
+
+nav {
+	width: 200px;
+	height: 350px;
+	background-color: #5494D9;
+}
+
+section {
+	width:1000px;
+}
+
+footer > .logo {
+	height: 100px;
+	width: 200px;
+}
+
+footer > .copyright {
+	height: 100px;
+	width: 1000px;
+}
