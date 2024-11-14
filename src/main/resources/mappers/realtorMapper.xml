@@ -6,7 +6,7 @@
  <mapper namespace="com.bbar.spring.test.mvc2.repository.RealtorRepository">
  
  	<insert id="insertRealtorByObject" parameterType="com.bbar.spring.test.mvc2.domain.Realtor"
- 	useGeneratedKeys="true" keyProperty="id">
+ 	useGeneratedKeys="true" keyProperty="id"> <!-- Auto INCREMENT가 있을때 그 값을 반환 주로 id값 얻고 싶을때 사용 -->
  		INSERT INTO
  			`realtor`
  		(
