@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,13 +34,15 @@ public class WeatherController {
 	
 	@GetMapping("/create")
 	public String createWeather(
+			@DateTimeFormat(pattern="yyyy년 M월 d일") // 변환이 불가능한경우 이 타입으로 가능하게 해줌
 			@RequestParam("date") LocalDate date
 			, @RequestParam("weather") String weather
 			, @RequestParam("temperatures") double temperatures
 			, @RequestParam("precipitation") double precipitation
 			, @RequestParam("microDust") String microDust
-			, @RequestParam("windSpeed") double windSpeend
+			, @RequestParam("windSpeed") double windSpeed
 			, Model model
+//			, @ModelAttribute Weather weather // 위에 requestParam 쓰기 귀찮을때 이거 씀 근데 나는 객체 형태라 이거 연
 			) {
 		
 		Weather weatherHistory = new Weather();
@@ -48,11 +51,11 @@ public class WeatherController {
 		weatherHistory.setTemperatures(temperatures);
 		weatherHistory.setPrecipitation(precipitation);
 		weatherHistory.setMicroDust(microDust);
-		weatherHistory.setWindSpeed(windSpeend);
+		weatherHistory.setWindSpeed(windSpeed);
 		
 		int count = weatherService.addWeatherByObject(weatherHistory);
 		
-		return "redirect:list";
+		return "redirect:/thymeleaf/weather/list";
 		
 	}
 	
