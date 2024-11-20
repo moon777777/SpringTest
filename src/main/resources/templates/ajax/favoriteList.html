@@ -21,13 +21,47 @@
 					<td th:text="${status.count}"></td>
 					<td th:text="${favorite.name}"></td>
 					<td th:text="${favorite.url}"></td>
+					<td><button type=button class="btn btn-danger btn-sm delete-btn" th:data-favorite-id="${favorite.id}">삭제</button></td>
+					<!-- data속성 data-이름짓기 대문자는 절대쓰면 안됨 구분은 -로 -->
 				</tr>
 			</tbody>
 		</table>
 	</div>
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function() {
+		
+	$(".delete-btn").on("click", function(){
+		// 특정 즐겨찾기 삭제
+		// input : 삭제 대상 id
+		// 대상이 되는 즐겨 찾기 삭제 (API 활용) 왜 : 서버에 있는 실제 정보를 삭제해야 하니까.
+		// output : 새로고침
+		
+		let id = $(this).data("favorite-id"); //this는 이벤트에 해당되는 해당 되는 객체를 얻어온다
+		
+		
+		// 이 위의 과정이 중요
+		$.ajax({
+			type:"get"
+			, url:"/ajax/favorite/delete"
+			, data:{"id":id}
+			, success:function(response) {
+				if(response.result == "success") {
+					 location.reload();
+				} else {
+					 alert("삭제 실패");
+				}
+			}
+			, error:function() {
+				alert("즐겨찾기 삭제 에러");
+			}
+		});
+	});
+});
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>

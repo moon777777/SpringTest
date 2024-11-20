@@ -29,4 +29,27 @@ public class FavoriteService {
 		
 		return count;
 	}
+	
+	public boolean isDuplicateUrl(String url) {
+		int count = favoriteRepository.countByUrl(url);
+		
+//		if(count > 0) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+		
+		return count > 0;
+	}
+	
+	// 특정 즐겨찾기 삭제
+	// input : 삭제 대상 id
+	// 기능 : id와 대응되는 즐겨 찾기 삭제
+	// output : 뭐 예를 들어 됐는지 확인되는 count 개발은 무조건 input output
+	public int deleteFavorite(int id) {
+		
+		int count = favoriteRepository.deleteFavorite(id);
+		
+		return count;
+	}
 }

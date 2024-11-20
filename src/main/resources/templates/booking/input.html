@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>예약하기</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/booking/style.css">
+</head>
+<body>
+
+	<div id="wrap">
+            <header class="d-flex justify-content-center align-items-center my-4">
+                <h1 class="font-weight-light display-4">통나무 팬션</h1>
+            </header>
+            <nav>
+                <div class="menu">
+                    <ul class="nav nav-fill font-weight-bold">
+                        <li class="nav-item"><a class="nav-link text-white" href="http://localhost:8080/ajax/booking/main">팬션소개</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#">객실보기</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="http://localhost:8080/ajax/booking/input">예약하기</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="http://localhost:8080/ajax/booking/list">예약목록</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <section class="main-contents d-flex justify-content-center">
+            	<div class="intput-contents my-4 col-7">
+                    <h2 class="text-center">예약하기</h2>               
+                   <div class="mt-2">
+                        <label class=>이름</label>
+                        <input type="text" id="nameInput" class="form-control">
+                    </div>
+                    <div class="mt-2">
+                        <label class=>예약날짜</label>
+                        <input type="text" id="dateInput" class="form-control">
+                    </div>
+                     <div class="mt-2">
+                        <label class=>숙박일수</label>
+                        <input type="text" id="dayInput" class="form-control">
+                    </div>
+                     <div class="mt-2">
+                        <label class=>숙박인원</label>
+                        <input type="text" id="headcountInput" class="form-control">
+                    </div>
+                     <div class="mt-2">
+                        <label class=>전화번호</label>
+                        <input type="text" id="phoneNumberInput" class="form-control">
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="button" id="bookingBtn" class="btn btn-block bg-warning">예약하기</button>
+                    </div>                    
+                </div>
+                
+            
+            </section>
+            <footer>
+                <div class="ml-3 small text-secondary">
+                    제주특별자치도 제주시 애월읍<br>
+                    사업자등록번호: 111-22-255222/농어촌민박사업자지정/대표:김통목<br>
+                    Copyright 2025. tongnamu All rights reserved.
+                </div>
+            </footer>
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script>
+$(document).ready(function() {
+	
+	$("dateInput").datepicker({
+		dateFormat:"yyyy년 m월 d일"	
+	});
+	
+	$("#bookingBtn").on("click", function(){
+		let name = $("#nameInput").val();
+		let date = $("#dateInput").val();
+		let day = $("#dayInput").val();
+		let headcount = $("#headcountInput").val();
+		let phoneNumber = $("#phoneNumberInput").val();
+		
+		// 유효성 검사
+		if(name == "") {
+			alert("이름을 입력하세요");
+			return;
+		}
+		
+		if(date == "") {
+			alert("예약날짜를 입력하세요");
+			return;
+		}
+		
+		if(day == "") {
+			alert("숙박일수를 입력하세요");
+			return;
+		}
+		
+		// day가 숫자가 아닌경우
+		// Not a Number
+		if(isNaN(day)) {
+			alert("일수는 숫자만 입력 가능합니다.")
+			return;
+		}
+		
+		if(headcount == "") {
+			alert("숙박인원을 입력하세요");
+			return;
+		}
+		if(isNaN(headcount)) {
+			alert("인원은 숫자만 입력 가능합니다.")
+			return;
+		}
+		
+		if(phoneNumber == "") {
+			alert("전화번호를 입력하세요");
+			return;
+		}
+		
+		$.ajax({
+			type:"get"
+			, url:"/ajax/booking/create"
+			, data:{
+				"name":name
+				, "date":date
+				, "day":day
+				, "headcount":headcount
+				, "phoneNumber":phoneNumber}
+			, success:function(response) {
+				if(response.result == "success") {
+					location.href = "/ajax/booking/list"
+				} else {
+					alert("저장 실패");
+				}
+			}
+			, error:function() {
+				alert("저장 에러");
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>
