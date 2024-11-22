@@ -32,24 +32,32 @@ public class CompanyService {
 		
 		Optional<Company> optionalCompany = companyRepository.findById(id);
 		
-		Company company = optionalCompany.orElse(null);
 		
-		company = company.toBuilder()
-				.scale(scale)
-				.headcount(headcount)
-				.build();
+		if(optionalCompany.isPresent()) {
+			// optional 객체에 데이터 객체가 null이 아닌경우
+			// 새로운 표현 방식
+			Company company = optionalCompany.get();
+			
+			company = company.toBuilder()
+					.scale(scale)
+					.headcount(headcount)
+					.build();
+			Company result = companyRepository.save(company);
+			return result;
+		}
 		
-		Company result = companyRepository.save(company);
+		return null;
 		
-		return result;
 	}
 	
 	public void deleteCompany(int id) {
 		
 		Optional<Company> optionalCompany = companyRepository.findById(id);
 		
-		Company company = optionalCompany.orElse(null);
+		// 람다식 표현
+		// null이 아닐때 수행할 기능 등록
+		optionalCompany.ifPresent(company -> companyRepository.delete(company));
 		
-		companyRepository.delete(company);
+		
 	}
 }
